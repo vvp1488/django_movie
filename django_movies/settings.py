@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'silk',
 
+    'drf_yasg',
+
     'rest_framework',
     'django_filters',
     'djoser',
