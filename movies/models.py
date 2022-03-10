@@ -78,7 +78,7 @@ class Movie(models.Model):
         return self.all_reviews.filter(parent__isnull=True)
 
     def get_rating(self):
-        rating = self.rating_set.values('star').aggregate(Avg('star'))
+        rating = self.ratings.values('star').aggregate(Avg('star'))
         return round(rating['star__avg'])
 
     class Meta:
