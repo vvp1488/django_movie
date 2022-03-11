@@ -1,11 +1,9 @@
 from rest_framework import generics, permissions, viewsets
 from django.db import models
-from rest_framework.response import Response
 
-from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 
-from ..services import get_client_ip, MovieFilter
+from ..services import get_client_ip, MovieFilter, PaginationMovies
 from ..models import Movie, Actor
 from .serializers import (
     MovieListSerializer,
@@ -20,6 +18,7 @@ from .serializers import (
 class ActorsViewSet(viewsets.ReadOnlyModelViewSet):
     """Информации о актерах и режиссерах"""
     queryset = Actor.objects.all()
+    pagination_class = PaginationMovies
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -32,7 +31,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
     """Вывод списка фильмов"""
     filter_backends = (DjangoFilterBackend, )
     filterset_class = MovieFilter
-    permission_classes = [permissions.IsAuthenticated,]
+    # permission_classes = [permissions.IsAuthenticated,]
 
     def get_queryset(self):
         movies = Movie.objects.filter(draft=False).annotate(

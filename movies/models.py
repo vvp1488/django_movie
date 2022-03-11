@@ -81,10 +81,10 @@ class Movie(models.Model):
         rating = self.ratings.values('star').aggregate(Avg('star'))
         return round(rating['star__avg'])
 
+
     class Meta:
         verbose_name = "Фильм"
         verbose_name_plural = "Фильмы"
-        ordering = ('-id',)
 
 
 class MovieShots(models.Model):

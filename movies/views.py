@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
@@ -25,6 +25,10 @@ class MoviesView(GenreYear, ListView):
     #Рандомный порядок вывода фильмов
     queryset = Movie.objects.filter(draft=False).order_by("?")
     paginate_by = 3
+    #
+    # def get_queryset(self):
+    #     queryset = Movie.objects.filter(draft=False).order_by("?")
+    #     return queryset
 
 
 class MovieDetailView(GenreYear, DetailView):
@@ -127,18 +131,13 @@ class MoviesByCategory(GenreYear, ListView):
         return queryset
 
 
-class MoviesByRating(GenreYear, ListView):
-    """Список фильмов по рейтингу"""
-    paginate_by = 3
-    model = Movie
-    # template_name = 'movies/base.html'
-
-    def get_queryset(self):
-        star = self.kwargs.get('star')
-        queryset = Movie.objects.all()
-        return queryset
-
-
 class Test(View):
+
     def get(self, request):
-        return render(request, 'movies/test.html')
+        movies = Movie.objects.all().select_related('category').prefetch_related(
+            Prefetch('genres', queryset=Genre.objects.only('name'))
+        ).only('category__id')
+        context = {
+            'movies': movies,
+        }
+        return render(request, 'movies/test.html', context)
