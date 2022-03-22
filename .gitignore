@@ -28,3 +28,5 @@ db.sqlite3
 !*backend/*/migrations/__init__.py
 
 celerybeat-schedule
+
+geckodriver.log

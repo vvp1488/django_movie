@@ -1,13 +1,14 @@
 from django.db import models
 from django.db.models import Avg
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Category(models.Model):
     """Категории"""
     name = models.CharField('Категория', max_length=150)
     description = models.TextField("Описание")
-    url = models.SlugField(max_length=160, unique=True)
+    url = models.SlugField(max_length=160, unique=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -15,6 +16,10 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
+
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.name)
+        super().save(*args, **kwargs)
 
 
 class Actor(models.Model):
@@ -27,12 +32,15 @@ class Actor(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('actor_detail', kwargs={"slug": self.name})
-
     class Meta:
         verbose_name = "Актеры и режиссеры"
         verbose_name_plural = "Актеры и режиссеры"
+
+    def get_absolute_url(self):
+        return reverse('actor_detail', kwargs={"slug": self.name})
+
+    def get_movies(self):
+        return Movie.objects.filter(actors=self.id)
 
 
 class Genre(models.Model):
@@ -81,7 +89,6 @@ class Movie(models.Model):
         rating = self.ratings.values('star').aggregate(Avg('star'))
         return round(rating['star__avg'])
 
-
     class Meta:
         verbose_name = "Фильм"
         verbose_name_plural = "Фильмы"
@@ -92,7 +99,7 @@ class MovieShots(models.Model):
     title = models.CharField("Заголовок", max_length=100)
     description = models.TextField('Описание')
     image = models.ImageField("Изображение", upload_to='movie_shots/')
-    movie = models.ForeignKey(Movie, verbose_name='Фильм', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, verbose_name='Фильм', on_delete=models.CASCADE, related_name='shots')
 
     def __str__(self):
         return self.title

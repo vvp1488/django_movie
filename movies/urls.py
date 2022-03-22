@@ -2,7 +2,6 @@ from django.urls import path
 
 from . import views
 
-
 urlpatterns = [
     path("", views.MoviesView.as_view(), name='main_page'),
     path('test/', views.Test.as_view(), name='test'),

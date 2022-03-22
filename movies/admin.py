@@ -21,8 +21,9 @@ class MovieAdminForm(forms.ModelForm):
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
     """Категории"""
-    list_display = ("id", "name", "url", )
-    list_display_links = ("name", )
+    list_display = ("id", "name", "url",)
+    list_display_links = ("name",)
+    prepopulated_fields = {'url': ('name',),}
 
 
 class ReviewInline(admin.TabularInline):
@@ -51,13 +52,14 @@ class MovieAdmin(TranslationAdmin):
     list_display = ("title", "category", "url", "draft")
     list_filter = ("category", "year")
     search_fields = ("title", "category__name")
-    inlines = [MovieShotsInline, ReviewInline ]
+    prepopulated_fields = {'url': ('title',), }
+    inlines = [MovieShotsInline, ReviewInline]
     save_on_top = True
     save_as = True
-    list_editable = ("draft", )
+    list_editable = ("draft",)
     form = MovieAdminForm
     actions = ["publish", "unpublish"]
-    readonly_fields = ("get_image", )
+    readonly_fields = ("get_image",)
     fieldsets = (
         (None, {
             "fields": (("title", "tagline"),)
@@ -104,7 +106,7 @@ class MovieAdmin(TranslationAdmin):
         self.message_user(request, f'{message_bit}')
 
     publish.short_description = "Опубликовать"
-    publish.allowed_permissions = ('change', )
+    publish.allowed_permissions = ('change',)
 
     unpublish.short_description = "Снять с публикации"
     unpublish.allowed_permissions = ('change',)
@@ -127,10 +129,13 @@ class GenreAdmin(TranslationAdmin):
 class ActorAdmin(TranslationAdmin):
     """Актеры и режиссеры"""
     list_display = ("name", "age", "get_image")
-    readonly_fields = ("get_image", )
+    readonly_fields = ("get_image",)
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
+        try:
+            return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
+        except:
+            return ''
 
     get_image.short_description = "Изображения"
 
