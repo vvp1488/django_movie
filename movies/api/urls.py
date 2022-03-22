@@ -9,7 +9,7 @@ urlpatterns = format_suffix_patterns([
     path('review/', api_views.ReviewCreateViewSet.as_view({'post': 'create'})),
     path('rating/', api_views.AddStarRatingViewSet.as_view({'post': 'create'})),
     path('actors/', api_views.ActorsViewSet.as_view({'get': 'list'})),
-    path('actors/<int:pk>/', api_views.ActorsViewSet.as_view({'get': 'retrieve'}))
+    path('actors/<int:pk>/', api_views.ActorsViewSet.as_view({'get': 'retrieve'})),
 ])
 #
 # urlpatterns = [

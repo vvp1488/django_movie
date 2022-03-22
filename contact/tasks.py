@@ -1,7 +1,7 @@
 from django_movies.celery import app
 from django.core.mail import send_mail
 
-from .service import send
+from .service import send, create_fake_contact
 from .models import Contact
 
 
@@ -20,3 +20,8 @@ def send_beat_email():
             [contact.email],
             fail_silently=False,
         )
+
+
+@app.task
+def new_fake_contact(num):
+    create_fake_contact(num)
