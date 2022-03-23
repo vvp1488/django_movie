@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q, Prefetch
+from django.db.models import Q, Prefetch, Avg, Func, IntegerField, DecimalField
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
@@ -8,6 +8,10 @@ from .models import Movie, Actor, Genre, Rating, Category
 from .forms import ReviewForm, RatingForm
 from .services import get_client_ip
 
+
+class Round(Func):
+    function = 'ROUND'
+    arity = 2
 
 class GenreYear:
     """Жанры и года выхода фильмов"""
@@ -23,12 +27,13 @@ class MoviesView(GenreYear, ListView):
     """Список фильмов"""
     model = Movie
     #Рандомный порядок вывода фильмов
-    queryset = Movie.objects.filter(draft=False).order_by("?")
+    queryset = Movie.objects.filter(draft=False).annotate(star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).order_by('?')
     paginate_by = 3
-    #
-    # def get_queryset(self):
-    #     queryset = Movie.objects.filter(draft=False).order_by("?")
-    #     return queryset
+
+    def get_context_data(self):
+        contex = super().get_context_data()
+        contex['range'] = range(5)
+        return contex
 
 
 class MovieDetailView(GenreYear, DetailView):
@@ -141,3 +146,38 @@ class Test(View):
             'movies': movies,
         }
         return render(request, 'movies/test.html', context)
+
+
+class MoviesByRating(GenreYear, ListView):
+    """Фильтрация по рейтингу из сайд-бара"""
+    model = Movie
+    paginate_by = 3
+
+    def get_context_data(self):
+        contex = super().get_context_data()
+        contex['range'] = range(5)
+        return contex
+
+    def get_queryset(self):
+        queryset = Movie.objects.filter(draft=False).annotate(star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).filter(star_avg=self.kwargs['star_avg'])
+        return queryset
+
+
+class MoviesMostViews(GenreYear, ListView):
+    model = Movie
+    paginate_by = 3
+
+    def get_context_data(self):
+        contex = super().get_context_data()
+        contex['range'] = range(5)
+        return contex
+
+    def get_queryset(self):
+        if self.kwargs['how_sort'] == 'mostviews':
+            queryset = Movie.objects.filter(draft=False).annotate(
+            star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).filter(star_avg__gte=1).order_by('-star_avg')
+        elif self.kwargs['how_sort'] == 'lessviews':
+            queryset = Movie.objects.filter(draft=False).annotate(
+                star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).filter(star_avg__gte=1).order_by('star_avg')
+        return queryset
+

@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView
 
+from django.db.models import Sum, Count
+
 from .models import Contact
 from .forms import ContactForm
 from .tasks import send_spam_email, new_fake_contact
@@ -19,8 +21,8 @@ class ContactView(CreateView):
 
 
 def contact_list(request):
-    contacts_count = Contact.objects.all().count()
-    return render(request, 'contact/data.html', context={'contacts_count': contacts_count})
+    c_count = Contact.objects.all().count()
+    return render(request, 'contact/data.html', context={'c_count': c_count })
 
 
 def generate_contacts(request):

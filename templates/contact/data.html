@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p>Всего количество контактов - <b>{{ contacts_count }}</b></p>
+<p>Всего количество контактов - <b>{{ c_count }}</b></p>
 
 <form action="{% url 'generate' %}" method="post">
     {% csrf_token %}

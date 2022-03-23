@@ -36,7 +36,7 @@ urlpatterns += i18n_patterns(
     path('accounts/', include('allauth.urls')),
     path('silk/', include('silk.urls', namespace='silk')),
     path('contact/', include("contact.urls")),
-    path('pages/', include('django.contrib.flatpages.urls')),
+    path('flatpages/', include('django.contrib.flatpages.urls')),
     path("", include("movies.urls")),
 
 )

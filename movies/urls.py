@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     path("", views.MoviesView.as_view(), name='main_page'),
+    path('movie_list_by_rating/<int:star_avg>/', views.MoviesByRating.as_view(), name='movie_list_by_rating'),
+    path('movies/<str:how_sort>/', views.MoviesMostViews.as_view(), name='movie_list_most_view'),
     path('test/', views.Test.as_view(), name='test'),
     path("filter/", views.FilterMoviesView.as_view(), name='filter'),
     path("search/", views.Search.as_view(), name='search'),

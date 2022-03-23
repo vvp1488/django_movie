@@ -23,7 +23,7 @@
                     </li>
                     <li>
                         {% if user.is_authenticated %}
-                        <span style="color: rgb(0, 0, 0); padding-left: 20px; font-weight: 700; text-transform: uppercase;">{% trans "Пользователь" %} : {{ user.username }}</span>
+                        <span style="color: rgb(255, 255, 255); padding-left: 20px; font-weight: 700; text-transform: uppercase;">{% trans "Пользователь" %} : {{ user.username }}</span>
                         <a href="{% url 'account_logout' %}"
                            style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
                             {% trans "Выход" %}

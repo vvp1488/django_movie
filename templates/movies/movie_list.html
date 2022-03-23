@@ -1,8 +1,17 @@
 {% extends 'movies/base.html' %}
+{% load static %}
 {% block title %} Все о кино {% endblock title %}
 {% block header %} bg1 {% endblock header %}
 {% block movie %}
     <div class="left-ads-display col-lg-9">
+        <ol class="breadcrumb editContent">
+    <li class="breadcrumb-item">
+        <a href="{% url 'movie_list_most_view' how_sort='mostviews' %}" class="editContent">Лучшие фильмы <img src="{% static 'images/fingerup.png' %}" style="height:20px;"></a>
+
+    </li>
+    <li class="breadcrumb-item editContent">
+        <a href="{% url 'movie_list_most_view' how_sort='lessviews' %}" class="editContent">Худшие фильмы<img src="{% static 'images/fingerdown.png' %}" style="height:25px;"></a></li>
+</ol>
         <div class="row">
             {% for movie in object_list %}
             <div class="col-md-4 product-men">
@@ -22,11 +31,14 @@
                             </div>
                         </div>
                         <ul class="stars">
-                            <li><a href="#"><span class="fa fa-star" aria-hidden="true" ></span></a></li>
-                            <li><a href="#"><span class="fa fa-star" aria-hidden="true" ></span></a></li>
-                            <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true" ></span></a></li>
-                            <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true" ></span></a></li>
-                            <li><a href="#"><span class="fa fa-star-o" aria-hidden="true" ></span></a></li>
+                            {% for x in range %}
+                                {% if movie.star_avg >= forloop.counter %}
+                            <li><span class="fa fa-star" aria-hidden="true" ></span></li>
+                                {% else %}
+                            <li><span class="fa fa-star-o" aria-hidden="true" ></span></li>
+                                {% endif %}
+                            {% endfor %}
+
                         </ul>
                     </div>
                 </div>

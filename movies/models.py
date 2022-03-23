@@ -86,8 +86,11 @@ class Movie(models.Model):
         return self.all_reviews.filter(parent__isnull=True)
 
     def get_rating(self):
-        rating = self.ratings.values('star').aggregate(Avg('star'))
-        return round(rating['star__avg'])
+        rating = self.ratings.only('star').aggregate(Avg('star'))
+        if rating['star__avg'] is not None:
+            return round(rating['star__avg'])
+        else:
+            return 0
 
     class Meta:
         verbose_name = "Фильм"
