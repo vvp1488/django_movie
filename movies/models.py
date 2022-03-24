@@ -1,7 +1,14 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Avg
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from django.urls import reverse
 from django.utils.text import slugify
+
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -153,3 +160,23 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
+
+
+class LogoProfile(models.Model):
+    logo = models.ImageField(upload_to='profile_logo/')
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    favourite_movies = models.ManyToManyField(Movie, blank=True)
+    logo = models.ForeignKey(LogoProfile, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_or_save_user_activity(sender, created, instance, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()

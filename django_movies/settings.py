@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 from datetime import timedelta
 import environ
-
 env = environ.Env()
 environ.Env.read_env()
 

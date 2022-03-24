@@ -21,13 +21,16 @@
                             {% endfor %}
                         </ul>
                     </li>
+
                     <li>
                         {% if user.is_authenticated %}
-                        <span style="color: rgb(255, 255, 255); padding-left: 20px; font-weight: 700; text-transform: uppercase;">{% trans "Пользователь" %} : {{ user.username }}</span>
-                        <a href="{% url 'account_logout' %}"
-                           style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">
-                            {% trans "Выход" %}
-                        </a>
+                        <label for="drop-3" class="toggle">{% trans "Пользователь" %} <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
+                        <a href="#">{% trans "Пользователь"  %}: {{ user.username }} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <input type="checkbox" id="drop-3">
+                        <ul>
+                            <li><a href="{% url 'profile' pk=user.profile.id %}">Профиль</a></li>
+                            <li><a href="{% url 'account_logout' %}">Выйти</a></li>
+                        </ul>
                         {% else %}
                         <a href="{% url 'account_login' %}"
                            style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">

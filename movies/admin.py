@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Genre, Movie, MovieShots, Actor, Rating, RatingStar, Reviews
+from .models import Category, Genre, Movie, MovieShots, Actor, Rating, RatingStar, Reviews, Profile, LogoProfile
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from modeltranslation.admin import TranslationAdmin
@@ -162,3 +162,5 @@ admin.site.register(RatingStar)
 
 admin.site.site_title = "Все о кино"
 admin.site.site_header = "Все о кино"
+admin.site.register(Profile)
+admin.site.register(LogoProfile)

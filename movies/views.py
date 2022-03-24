@@ -1,13 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from django.db.models import Q, Prefetch, Avg, Func, IntegerField, DecimalField
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
-from .models import Movie, Actor, Genre, Rating, Category
+from .models import Movie, Actor, Genre, Rating, Category, Profile, LogoProfile
 from .forms import ReviewForm, RatingForm
 from .services import get_client_ip
-
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 class Round(Func):
     function = 'ROUND'
@@ -168,9 +171,9 @@ class MoviesMostViews(GenreYear, ListView):
     paginate_by = 3
 
     def get_context_data(self):
-        contex = super().get_context_data()
-        contex['range'] = range(5)
-        return contex
+        context = super().get_context_data()
+        context['range'] = range(5)
+        return context
 
     def get_queryset(self):
         if self.kwargs['how_sort'] == 'mostviews':
@@ -181,3 +184,37 @@ class MoviesMostViews(GenreYear, ListView):
                 star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).filter(star_avg__gte=1).order_by('star_avg')
         return queryset
 
+
+class ProfileView(DetailView):
+    model = Profile
+    context_object_name = 'profile'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfileView, self).get_context_data(*args,**kwargs)
+        context['logos'] = LogoProfile.objects.all()
+        return context
+
+
+class ChangeAvatarView(View):
+    """Изменить аватар в профиле"""
+    def post(self, request, *args, **kwargs):
+        profile_id = self.kwargs['pk']
+        logo_id = request.POST['logo']
+        profile = Profile.objects.select_for_update().get(pk=profile_id)
+        with transaction.atomic():
+            profile.logo_id = logo_id
+            profile.save()
+        return HttpResponseRedirect(reverse('profile', kwargs={'pk': profile_id}))
+
+
+class AddToFavourite(View):
+    '''Добавить фильм в избранные'''
+    def post(self, request, *args, **kwargs):
+        profile = Profile.objects.select_for_update().get(user=request.user)
+        movie = Movie.objects.get(pk=self.kwargs['pk'])
+        with transaction.atomic():
+            profile.favourite_movies.add(movie)
+            profile.save()
+        messages.add_message(request, messages.INFO, 'Фильм успешно добавлен!')
+
+        return HttpResponseRedirect(reverse('main_page'))

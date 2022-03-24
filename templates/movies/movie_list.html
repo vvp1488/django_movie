@@ -38,7 +38,13 @@
                             <li><span class="fa fa-star-o" aria-hidden="true" ></span></li>
                                 {% endif %}
                             {% endfor %}
-
+                            {% if user.is_authenticated %}
+                            <br><hr>
+                                <form action="{% url 'add_to_favourite' pk=movie.id %}" method="post" >
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-primary" value="Добавить в избранные">
+                                </form>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>

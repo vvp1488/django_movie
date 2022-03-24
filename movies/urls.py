@@ -4,6 +4,9 @@ from . import views
 
 urlpatterns = [
     path("", views.MoviesView.as_view(), name='main_page'),
+    path('profile/<int:pk>/', views.ProfileView.as_view(), name='profile'),
+    path('add_to_favourite/<int:pk>/', views.AddToFavourite.as_view(), name='add_to_favourite'),
+    path('profile/change_avatar/<int:pk>/', views.ChangeAvatarView.as_view(), name='change_avatar'),
     path('movie_list_by_rating/<int:star_avg>/', views.MoviesByRating.as_view(), name='movie_list_by_rating'),
     path('movies/<str:how_sort>/', views.MoviesMostViews.as_view(), name='movie_list_most_view'),
     path('test/', views.Test.as_view(), name='test'),
