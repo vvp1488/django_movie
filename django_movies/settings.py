@@ -369,8 +369,6 @@ COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 #
 # MEDIA_URL = 'media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-REDIS_LOCATION_PRIMARY = env('REDIS_LOCATION_PRIMARY')
-REDIS_LOCATION_REPLICA1 = env('REDIS_LOCATION_REPLICA1')
 
 
 
