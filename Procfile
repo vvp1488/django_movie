@@ -1,3 +1,3 @@
 release: python manage.py migrate
 web: gunicorn django_movies.wsgi
-worker: celery -A FakeDataGenerator worker --beat
+worker: celery -A django_movies worker --beat
