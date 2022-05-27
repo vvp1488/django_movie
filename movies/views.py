@@ -210,7 +210,7 @@ class ChangeAvatarView(View):
 class AddToFavourite(View):
     '''Добавить фильм в избранные'''
     def post(self, request, *args, **kwargs):
-        profile = Profile.objects.select_for_update().get(user=request.user)
+        profile = Profile.objects.get(user=request.user)
         movie = Movie.objects.get(pk=self.kwargs['pk'])
         with transaction.atomic():
             profile.favourite_movies.add(movie)

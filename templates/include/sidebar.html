@@ -1,4 +1,5 @@
-{% load i18n movie_tag %}
+{% load i18n movie_tag  %}
+
     <div class="search-bar w3layouts-newsletter">
         <h3 class="sear-head editContent" >{% trans "Поиск фильма" %}</h3>
         <form action="{% url 'search' %}" method="get" class="d-flex editContent" >
@@ -41,53 +42,59 @@
         <h3 class="sear-head editContent" >{% trans "Рейтинг" %}</h3>
         <ul class="w3layouts-box-list">
             <li>
+
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star" aria-hidden="true" ></span>
                 <a href="{% url 'movie_list_by_rating' star_avg=5 %}">
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="editContent" >5.0</span>
+                    <span class="editContent" ><b>5.0</b></span>
                 </a>
+
             </li>
             <li>
-                <a href="{% url 'movie_list_by_rating' star_avg=4 %}">
                     <span class="fa fa-star" aria-hidden="true" ></span>
                     <span class="fa fa-star" aria-hidden="true" ></span>
                     <span class="fa fa-star" aria-hidden="true" ></span>
                     <span class="fa fa-star" aria-hidden="true" ></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
-                    <span class="editContent" >4.0</span>
+                    <a href="{% url 'movie_list_by_rating' star_avg=4 %}">
+                    <span class="editContent" ><b>4.0</b></span>
                 </a>
             </li>
             <li>
+
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star" aria-hidden="true" ></span>
+                    <span class="fa fa-star-o" aria-hidden="true" ></span>
+                    <span class="fa fa-star-o" aria-hidden="true" ></span>
+
                 <a href="{% url 'movie_list_by_rating' star_avg=3 %}">
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star" aria-hidden="true" ></span>
-                    <span class="fa fa-star-o" aria-hidden="true" ></span>
-                    <span class="fa fa-star-o" aria-hidden="true" ></span>
-                    <span class="editContent" >3.0</span>
+                    <span class="editContent" ><b>3.0</b></span>
                 </a>
             </li>
             <li>
-                <a href="{% url 'movie_list_by_rating' star_avg=2 %}">
+
                     <span class="fa fa-star" aria-hidden="true" ></span>
                     <span class="fa fa-star" aria-hidden="true" ></span>
                     <span class="fa fa-star-o" aria-hidden="true"></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
-                    <span class="editContent" >2.0</span>
+                <a href="{% url 'movie_list_by_rating' star_avg=2 %}">
+                    <span class="editContent" ><b>2.0</b></span>
                 </a>
             </li>
             <li>
-                <a href="{% url 'movie_list_by_rating' star_avg=1 %}">
+
                     <span class="fa fa-star" aria-hidden="true"></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
                     <span class="fa fa-star-o" aria-hidden="true" ></span>
-                    <span class="editContent" >1.0</span>
+                <a href="{% url 'movie_list_by_rating' star_avg=1 %}">
+                    <span class="editContent"><b>1.0</b></span>
                 </a>
             </li>
         </ul>
