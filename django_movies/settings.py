@@ -111,7 +111,7 @@ DATABASES = {
         'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
-        'HOST': 'djangomovies.cmu28ekwtigi.eu-central-1.rds.amazonaws.com',
+        'HOST': env('DB_HOST'),
         'PORT': '5432',
     }
 }
