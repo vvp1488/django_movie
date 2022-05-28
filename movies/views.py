@@ -30,7 +30,7 @@ class MoviesView(GenreYear, ListView):
     """Список фильмов"""
     model = Movie
     #Рандомный порядок вывода фильмов
-    queryset = Movie.objects.filter(draft=False).annotate(star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).order_by('?')
+    queryset = Movie.objects.filter(draft=False).annotate(star_avg=Round(Avg('ratings__star'), 2, output_field=DecimalField())).order_by('title')
     paginate_by = 3
 
     def get_context_data(self):
