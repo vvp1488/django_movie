@@ -6,18 +6,20 @@
     <div class="left-ads-display col-lg-9">
         <ol class="breadcrumb editContent">
     <li class="breadcrumb-item">
-        <a href="{% url 'movie_list_most_view' how_sort='mostviews' %}" class="editContent">{% trans 'Лучшие фильмы' %} <img src="{% static 'images/fingerup.png' %}" style="height:20px;"></a>
+        <a href="{% url 'movie_list_most_view' how_sort='mostviews' %}" class="editContent">{% trans 'Отсортировать по лучшим' %} <img src="{% static 'images/fingerup.png' %}" style="height:20px;"></a>
 
     </li>
     <li class="breadcrumb-item editContent">
-        <a href="{% url 'movie_list_most_view' how_sort='lessviews' %}" class="editContent">{% trans 'Худшие фильмы' %}<img src="{% static 'images/fingerdown.png' %}" style="height:25px;"></a></li>
+        <a href="{% url 'movie_list_most_view' how_sort='lessviews' %}" class="editContent">{% trans 'Отсортировать по худшим' %}<img src="{% static 'images/fingerdown.png' %}" style="height:25px;"></a></li>
 </ol>
         <div class="row">
             {% for movie in object_list %}
             <div class="col-md-4 product-men">
                 <div class="product-shoe-info editContent text-center mt-lg-4" >
                     <div class="men-thumb-item">
-                        <img src="{{ movie.poster.url }}" class="img-fluid" alt="" >
+                        <a href="{{ movie.get_absolute_url }}" class="editContent" >
+                            <img src="{{ movie.poster.url }}" class="img-fluid" alt="" >
+                        </a>
                     </div>
                     <div class="item-info-product">
                         <h4 class="">
@@ -27,12 +29,14 @@
                         </h4>
                         <div class="product_price">
                             <div class="grid-price">
+                                <a href="{{ movie.get_absolute_url }}" class="editContent" >
                                 <span class="money editContent" >{{ movie.tagline }}</span>
+                                </a>
                             </div>
                         </div>
                         <ul class="stars">
                             {% for x in range %}
-                                {% if movie.star_avg >= forloop.counter %}
+                                {% if movie.get_rating >= forloop.counter %}
                             <li><span class="fa fa-star" aria-hidden="true" ></span></li>
                                 {% else %}
                             <li><span class="fa fa-star-o" aria-hidden="true" ></span></li>

@@ -34,9 +34,9 @@ class MoviesView(GenreYear, ListView):
     paginate_by = 3
 
     def get_context_data(self):
-        contex = super().get_context_data()
-        contex['range'] = range(5)
-        return contex
+        context = super().get_context_data()
+        context['range'] = range(5)
+        return context
 
 
 class MovieDetailView(GenreYear, DetailView):
@@ -95,6 +95,7 @@ class FilterMoviesView(GenreYear, ListView):
         context = super().get_context_data(*args, **kwargs)
         context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist('year')])
         context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist('genre')])
+        context['range'] = range(5)
         return context
 
 
@@ -125,6 +126,7 @@ class Search(GenreYear, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["q"] = f'q={self.request.GET.get("q")}&'
+        context['range'] = range(5)
         return context
 
 
@@ -137,6 +139,11 @@ class MoviesByCategory(GenreYear, ListView):
         category = Category.objects.get(url=self.kwargs.get('slug'))
         queryset = Movie.objects.filter(category=category.pk)
         return queryset
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['range'] = range(5)
+        return context
 
 
 class Test(View):
