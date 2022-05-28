@@ -1,2 +1,3 @@
 web: gunicorn django_movies.wsgi
-worker: celery worker django_movies
+worker: python3 manage.py celery worker --logleverl=info
+celery_beat: python3 manage.py celery beat --loglevel=info
