@@ -374,7 +374,7 @@ COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 # DJANGO_CELERY_BEAT_TZ_AWARE = False
 # CELERY_ALWAYS_EAGER = True
-CELERY_BROKER_URL = env('REDIS_URL')
+BROKER_URL = env('BROKER_URL')
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_ACCEPT_CONTENT = ['application/json']
