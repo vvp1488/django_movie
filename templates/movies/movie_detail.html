@@ -141,7 +141,6 @@
                 </form>
             </div>
         </div>
-            <!--  //contact form grid ends here -->
         </div>
         {% for review in movie.get_review %}
         <div class="media py-5">
@@ -154,7 +153,7 @@
                     {{ review.text }}
                 </p>
                 <a href="#formReview" onclick="addReview('{{ review.name }}', '{{ review.id }}')">{% trans "Ответить" %}</a>
-                {% for rew in review.reviews_set.all %}
+                {% for rew in review.children.all %}
                 <div class="media mt-5 editContent" >
                     <a class="pr-3" href="#">
                         <img src="{% static 'images/te1.jpg' %}" class="img-fluid "  alt="image">

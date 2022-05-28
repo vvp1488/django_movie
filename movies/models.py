@@ -87,7 +87,7 @@ class Movie(models.Model):
         return reverse('single_movie', kwargs={'slug': self.url})
 
     def get_review(self):
-        return self.all_reviews.filter(parent__isnull=True)
+        return self.reviews_set.filter(parent__isnull=True)
 
     def get_rating(self):
         rating = self.ratings.only('star').aggregate(Avg('star'))
@@ -149,7 +149,7 @@ class Reviews(models.Model):
     name = models.CharField('Имя', max_length=100)
     text = models.TextField('Сообщения', max_length=5000)
     parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
-    movie = models.ForeignKey(Movie, verbose_name='фильм', on_delete=models.CASCADE, related_name='all_reviews')
+    movie = models.ForeignKey(Movie, verbose_name='фильм', on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name} - {self.movie}"

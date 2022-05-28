@@ -22,7 +22,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['djangomovies1.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'djangomovies1.herokuapp.com']
 
 
 
