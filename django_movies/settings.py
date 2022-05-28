@@ -372,7 +372,6 @@ COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
 BROKER_URL = env('BROKER_URL')
 CELERY_BROKER_URL = env('BROKER_URL')
 CELERY_RESULT_BACKEND = "django-db"
@@ -384,9 +383,12 @@ CELERY_RESULT_SERIALIZER = 'json'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': env('BROKER_URL'),
+        'LOCATION': env('REDIS_URL1'),
         'OPTIONS': {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            'IGNORE_EXCEPTIONS': True,
+            'SOCKET_TIMEOUT': 5,
+            'SOCKET_CONNECT_TIMEOUT': 5,
         },
     }
 }

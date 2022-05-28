@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-25 11:47+0300\n"
+"POT-Creation-Date: 2022-05-28 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: django_movies/settings.py:175
+#: django_movies/settings.py:157
 msgid "Russia"
 msgstr ""
 
-#: django_movies/settings.py:176
+#: django_movies/settings.py:158
 msgid "English"
 msgstr ""
 
@@ -383,9 +383,36 @@ msgid ""
 "mail address</a>."
 msgstr ""
 
-#: templates/include/header.html:12
+#: templates/contact/tags/form.html:2
+msgid "Рассылка новостей"
+msgstr "Newsletter"
+
+#: templates/contact/tags/form.html:3
+msgid ""
+"Оставь свою почту ниже и мы вам будем присылать все новости нашего сайта"
+msgstr "Leave your email below and we will send you all the news of our site"
+
+#: templates/include/footer.html:15
+msgid ""
+"Проект все о кино сделан в поучительных и тестовых целях с помощью Django "
+"framework"
+msgstr "The project is all about cinema made for educational and test purposes using the Django framework"
+
+#: templates/include/footer.html:47
+msgid "Разделы"
+msgstr "Sections"
+
+#: templates/include/footer.html:50 templates/include/header.html:12
 msgid "Главная"
 msgstr "Main page"
+
+#: templates/include/footer.html:53
+msgid "Контакты"
+msgstr "Contacts"
+
+#: templates/include/footer.html:60
+msgid "Страницы"
+msgstr "Pages"
 
 #: templates/include/header.html:14 templates/include/header.html:15
 msgid "Категории"
@@ -403,27 +430,35 @@ msgstr "Login"
 msgid "Регистрация"
 msgstr "Registration"
 
-#: templates/include/sidebar.html:3
+#: templates/include/header.html:71
+msgid "лучший сайт на django 3"
+msgstr "the best site on django3"
+
+#: templates/include/header.html:72
+msgid "Все о кино"
+msgstr "All about cinema"
+
+#: templates/include/sidebar.html:4
 msgid "Поиск фильма"
 msgstr "Movie search"
 
-#: templates/include/sidebar.html:5
+#: templates/include/sidebar.html:6
 msgid "Введите название"
 msgstr "Enter the title"
 
-#: templates/include/sidebar.html:12
+#: templates/include/sidebar.html:13
 msgid "Жанры"
 msgstr "Genre"
 
-#: templates/include/sidebar.html:26 templates/movies/movie_detail.html:23
+#: templates/include/sidebar.html:27 templates/movies/movie_detail.html:23
 msgid "Год"
 msgstr "Year"
 
-#: templates/include/sidebar.html:36
+#: templates/include/sidebar.html:37
 msgid "Найти"
 msgstr "Search"
 
-#: templates/include/sidebar.html:41 templates/movies/movie_detail.html:55
+#: templates/include/sidebar.html:42 templates/movies/movie_detail.html:55
 msgid "Рейтинг"
 msgstr "Rating"
 
@@ -483,21 +518,27 @@ msgstr "Name"
 msgid "Отправить"
 msgstr "Send"
 
-#: templates/movies/movie_detail.html:156
+#: templates/movies/movie_detail.html:155
 msgid "Ответить"
 msgstr "Reply"
 
 #: templates/movies/movie_list.html:9
-msgid "Лучшие фильмы"
-msgstr "Best films"
+msgid "Отсортировать по лучшим"
+msgstr "Sort by better"
 
 #: templates/movies/movie_list.html:13
-msgid "Худшие фильмы"
-msgstr "Worst films"
+msgid "Отсортировать по худшим"
+msgstr "Sort by worse"
 
 #: templates/movies/tags/last_movie.html:3
 msgid "Последние добавленные"
 msgstr "Last added"
+
+#~ msgid "Лучшие фильмы"
+#~ msgstr "Best films"
+
+#~ msgid "Худшие фильмы"
+#~ msgstr "Worst films"
 
 #~ msgid "Выход"
 #~ msgstr "Logout"

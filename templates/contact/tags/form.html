@@ -1,5 +1,6 @@
- <h3 class="footer-title text-uppercase editContent mb-lg-4 mb-3" >Рассылка новостей</h3>
- <p class="editContent" >Оставь свою почту ниже и мы вам будем присылать все новости нашего сайта.</p>
+{% load i18n %}
+<h3 class="footer-title text-uppercase editContent mb-lg-4 mb-3" >{% trans 'Рассылка новостей' %}</h3>
+ <p class="editContent" >{% trans 'Оставь свою почту ниже и мы вам будем присылать все новости нашего сайта' %}.</p>
  <form action="{% url 'contact' %}" method="post" class="w3layouts-newsletter">
      {% csrf_token %}
      {{ contact_form }}
