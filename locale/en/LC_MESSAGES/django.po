@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-28 17:05+0000\n"
+"POT-Creation-Date: 2022-05-29 10:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -396,7 +396,9 @@ msgstr "Leave your email below and we will send you all the news of our site"
 msgid ""
 "Проект все о кино сделан в поучительных и тестовых целях с помощью Django "
 "framework"
-msgstr "The project is all about cinema made for educational and test purposes using the Django framework"
+msgstr ""
+"The project is all about cinema made for educational and test purposes using "
+"the Django framework"
 
 #: templates/include/footer.html:47
 msgid "Разделы"
@@ -421,6 +423,14 @@ msgstr "Categories"
 #: templates/include/header.html:27 templates/include/header.html:28
 msgid "Пользователь"
 msgstr "User"
+
+#: templates/include/header.html:31
+msgid "Профиль"
+msgstr "Profile"
+
+#: templates/include/header.html:32
+msgid "Выйти"
+msgstr "Logout"
 
 #: templates/include/header.html:37
 msgid "Вход"
@@ -506,29 +516,61 @@ msgstr "About the movie "
 msgid "Оставить отзыв"
 msgstr "Leave feedback "
 
-#: templates/movies/movie_detail.html:125
+#: templates/movies/movie_detail.html:126
 msgid "Ваш комментарий"
 msgstr "Your comment"
 
-#: templates/movies/movie_detail.html:130
+#: templates/movies/movie_detail.html:131
 msgid "Имя"
 msgstr "Name"
 
-#: templates/movies/movie_detail.html:140
+#: templates/movies/movie_detail.html:149
 msgid "Отправить"
 msgstr "Send"
 
-#: templates/movies/movie_detail.html:155
+#: templates/movies/movie_detail.html:169
 msgid "Ответить"
 msgstr "Reply"
 
-#: templates/movies/movie_list.html:9
+#: templates/movies/movie_list.html:12
 msgid "Отсортировать по лучшим"
 msgstr "Sort by better"
 
-#: templates/movies/movie_list.html:13
+#: templates/movies/movie_list.html:16
 msgid "Отсортировать по худшим"
 msgstr "Sort by worse"
+
+#: templates/movies/profile_detail.html:10
+msgid "Информация о профиле"
+msgstr "Profile Information"
+
+#: templates/movies/profile_detail.html:16
+msgid "Логин"
+msgstr "Login"
+
+#: templates/movies/profile_detail.html:21
+msgid "Почта"
+msgstr "Email"
+
+#: templates/movies/profile_detail.html:26
+msgid "Избранные фильмы"
+msgstr "Favourite movies"
+
+#: templates/movies/profile_detail.html:28
+msgid "Смотреть"
+msgstr "Check"
+
+#: templates/movies/profile_detail.html:32
+msgid "Аватар"
+msgstr "Profile logo"
+
+#: templates/movies/profile_detail.html:33
+msgid "Выбрать"
+msgstr "Select"
+
+#: templates/movies/profile_detail.html:41
+msgid "Мои избранные фильмы"
+msgstr "My favourite movies"
 
 #: templates/movies/tags/last_movie.html:3
 msgid "Последние добавленные"
@@ -536,9 +578,6 @@ msgstr "Last added"
 
 #~ msgid "Лучшие фильмы"
 #~ msgstr "Best films"
-
-#~ msgid "Худшие фильмы"
-#~ msgstr "Worst films"
 
 #~ msgid "Выход"
 #~ msgstr "Logout"

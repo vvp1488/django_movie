@@ -30,8 +30,8 @@ class ReviewInline(admin.TabularInline):
     """Отзывы на страницы фильма"""
     model = Reviews
     extra = 1
-    fields = ('name', 'text', 'parent')
-    # readonly_fields = ("name", "email")
+    fields = ('name', 'text', 'parent','profile_user')
+    readonly_fields = ("name", "email")
 
 
 class MovieShotsInline(admin.TabularInline):
@@ -115,7 +115,7 @@ class MovieAdmin(TranslationAdmin):
 @admin.register(Reviews)
 class ReviewAdmin(admin.ModelAdmin):
     """ОТзывы к фильму"""
-    list_display = ("name", "email", "parent", "movie", "id")
+    list_display = ("name", "email", "parent", "movie", "id", 'profile_user')
     readonly_fields = ("name", "email")
 
 

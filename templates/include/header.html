@@ -28,8 +28,8 @@
                         <a href="#">{% trans "Пользователь"  %}: {{ user.username }} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
                         <input type="checkbox" id="drop-3">
                         <ul>
-                            <li><a href="{% url 'profile' pk=user.profile.id %}">Профиль</a></li>
-                            <li><a href="{% url 'account_logout' %}">Выйти</a></li>
+                            <li><a href="{% url 'profile' pk=user.profile.id %}">{% trans 'Профиль' %}</a></li>
+                            <li><a href="{% url 'account_logout' %}">{% trans 'Выйти' %}</a></li>
                         </ul>
                         {% else %}
                         <a href="{% url 'account_login' %}"

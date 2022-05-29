@@ -50,7 +50,6 @@ class MovieDetailView(GenreYear, DetailView):
         context["star_form"] = RatingForm()
         context["avg_rating"] = self.get_object().get_rating()
         context['form'] = ReviewForm()
-
         return context
 
 
@@ -64,6 +63,8 @@ class AddReview(View):
             form = form.save(commit=False)
             if request.POST.get("parent", None):
                 form.parent_id = int(request.POST.get("parent"))
+            if str(request.user) != 'AnonymousUser' :
+                form.profile_user = Profile.objects.get(user=request.user)
             form.movie_id = pk
             form.save()
         return redirect(movie.get_absolute_url())
@@ -207,7 +208,7 @@ class ChangeAvatarView(View):
     def post(self, request, *args, **kwargs):
         profile_id = self.kwargs['pk']
         logo_id = request.POST['logo']
-        profile = Profile.objects.select_for_update().get(pk=profile_id)
+        profile = Profile.objects.get(pk=profile_id)
         with transaction.atomic():
             profile.logo_id = logo_id
             profile.save()
