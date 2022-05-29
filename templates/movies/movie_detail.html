@@ -1,15 +1,20 @@
 {% extends 'movies/base.html' %}
 {% load static i18n %}
 {% load widget_tweaks %}
+{% block link %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+{% endblock link %}
 {% block title %} {{ movie.title }} {% endblock title %}
 {% block container %}
     <div class="container py-md-3">
 {% endblock container %}
 {% block sidebar %}
-    <div class="side-bar col-lg-4">
+    <div class="side-bar col-lg-3">
 {% endblock sidebar %}
 {% block movie %}
-<div class="left-ads-display col-lg-8">
+<div class="left-ads-display col-lg-9">
     <div class="row">
         <div class="desc1-left col-md-6">
             <img src="{{movie.poster.url}}" class="img-fluid" alt="">
@@ -102,10 +107,33 @@
         <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
             {% trans "О фильме" %} {{movie.title}}</h3><hr>
         <p>
-            {% for image in movie.movieshots_set.all %}
-                <img src="{{image.image.url}}" class="img-movie-shots" alt="{{image.description}}">
+            {% for image in movie.shots.all %}
+
+
             {% endfor %}
         </p>
+
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+      {% for image in movie.shots.all %}
+      {% if forloop.counter == 1 %}
+            <div class="carousel-item active">
+      {% else %}<div class="carousel-item ">{% endif %}
+                <img src="{{image.image.url}}" class="d-block w-100 img-fluid" alt="...">
+            </div>
+      {% endfor %}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
         <p class="editContent" style="outline: none; cursor: inherit;">
             {{ movie.description|safe }}
         </p>
@@ -195,4 +223,7 @@
                 document.getElementById("contactcomment").innerText = `${name}, `
             }
         </script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
 {% endblock movie %}

@@ -39,6 +39,7 @@ class MovieShotsInline(admin.TabularInline):
     model = MovieShots
     extra = 1
     readonly_fields = ("get_image",)
+    fields = ("title", "movie", "image")
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} width="100" height="110"')
@@ -147,7 +148,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class MovieShotsAdmin(TranslationAdmin):
+class MovieShotsAdmin(admin.ModelAdmin):
     """Кадры из фильма"""
     list_display = ("title", "movie", "get_image")
     readonly_fields = ("get_image",)
