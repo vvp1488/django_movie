@@ -380,16 +380,17 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': env('REDIS_URL1'),
-        'OPTIONS': {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            'IGNORE_EXCEPTIONS': True,
-            'SOCKET_TIMEOUT': 5,
-            'SOCKET_CONNECT_TIMEOUT': 5,
-        },
-    }
-}
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': env('REDIS_URL1'),
+#         'OPTIONS': {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             'IGNORE_EXCEPTIONS': True,
+#             'SOCKET_TIMEOUT': 5,
+#             'SOCKET_CONNECT_TIMEOUT': 5,
+#         },
+#     }
+# }
 
